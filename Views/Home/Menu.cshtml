@@ -1,0 +1,49 @@
+﻿@{
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+
+    ViewData["Title"] = "Menu - MotoGP";
+}
+
+<style>
+    .full-width {
+        width: 100%;
+        min-height: 100px;
+        max-height: 250px;
+    }
+
+    .parent {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .child {
+        text-align: center;
+    }
+
+    .bot-left {
+        position: fixed;
+        bottom: 30px;
+        left: 30px;
+    }
+</style>
+
+<img class="full-width" src="@string.Format("/images/banners/banner{0}.jpg", ViewData["BannerNr"])" alt="Banner Image">
+
+<div class="parent">
+    <div class="child">
+        <a asp-controller="Info" asp-action="ListRaces"><img class="centered" src="~/images/banners/races.png" /></a>
+        <a asp-controller="Info" asp-action="ListTeams"><img class="centered" src="~/images/banners/teams.png" /></a>
+
+    </div>
+ 
+    <div class="child">
+        <a asp-controller="Info" asp-action="ListRiders"><img class="centered" src="~/images/banners/riders.png" /></a>
+        <a asp-controller="Shop" asp-action="OrderTicket"><img class="centered" src="~/images/banners/tickets.png" /></a>
+    </div>
+</div>
+
+<div class="bot-left">
+    <a asp-controller="Shop" asp-action="ListTickets">Admin Tickets</a>
+</div>

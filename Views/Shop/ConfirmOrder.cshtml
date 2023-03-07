@@ -1,0 +1,15 @@
+﻿@model MotoGP.Models.Ticket
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ViewData["Title"] = "Confirmation";
+
+}
+
+<p>Thank you <b>@Html.DisplayFor(model => model.Name)</b> for ordering tickets for the race in
+    <b>@Html.DisplayFor(model => model.Race.Name)</b> on <b>@Html.DisplayFor(model => model.Race.Date)</b>. Your booking is registered on
+    <b>@Html.DisplayFor(model => model.OrderDate)</b>. We will send the <b>@Html.DisplayFor(model => model.Number)</b> tickets as soon as possible.
+</p>
+
+<a asp-controller="Home" asp-action="Menu">Back</a>

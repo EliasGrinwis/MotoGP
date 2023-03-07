@@ -1,0 +1,28 @@
+﻿@model MotoGP.Models.Race
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    String raceNumber = Convert.ToString(ViewData["raceNr"]);
+
+}
+
+<style>
+    .subtitle {
+        font-size: 20px;
+        font-weight: bold;
+    }
+</style>
+
+<h1>Race - @Html.DisplayFor(model => model.Name)</h1>
+
+<p class="subtitle"> @Html.DisplayFor(model => model.Date) -  @Html.DisplayFor(model => model.Country)</p>
+
+<img src="@raceNumber" />
+
+
+<p>@Html.DisplayFor(model => model.Description)</p>
+
+<p>
+    <a asp-controller="Info" asp-action="ListRaces">Back</a>
+</p>

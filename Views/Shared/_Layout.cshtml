@@ -1,0 +1,28 @@
+﻿@{
+    var banners = new List<String>
+            { "bannerRaces.jpg", "bannerRiders.jpg", "bannerTeams.jpg", "bannerTickets.jpg" };
+
+    int imageNumberIndex = Convert.ToInt32(ViewData["BannerNr"]) - 1;
+
+    string image = "/images/banners/" + banners[imageNumberIndex];
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"] - MotoGP</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+
+    <a asp-controller="Home" asp-action="Index"><img src="@image" /></a>
+
+    <h1>@ViewData["Title"]</h1>
+
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>

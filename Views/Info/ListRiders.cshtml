@@ -1,0 +1,60 @@
+﻿@model IEnumerable<MotoGP.Models.Rider>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ViewData["Title"] = "Riders";
+
+    String country = Convert.ToString(ViewData["raceNr"]);
+}
+
+<style>
+    .parent {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .child {
+        background-color: lightgray;
+        padding: 10px;
+        margin: auto;
+    }
+
+    img {
+        width: 100%;
+    }
+
+    .flag {
+        width: 20%;
+    }
+
+    .flex {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .number {
+        font-weight: bold;
+        font-size: 23px;
+    }
+</style>
+
+<div class="parent">
+@foreach (var rider in Model)
+{
+    var profileNumber = Html.DisplayFor(modelItem => rider.Number);
+    var countryNumber = Html.DisplayFor(modelItem => rider.CountryID);
+
+    <div class="child">
+        <img src="/images/riders/@(profileNumber).jpg">
+        <div class="flex">
+            <img class="flag" src="/images/flags/@(countryNumber).png">
+            <p class="number">@Html.DisplayFor(modelItem => rider.Number)</p>
+        </div>
+        <p><span>@Html.DisplayFor(modelItem => rider.FirstName)</span> <span>@Html.DisplayFor(modelItem => rider.LastName)</span></p>
+    </div>
+}
+</div>

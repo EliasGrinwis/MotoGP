@@ -1,0 +1,47 @@
+﻿@model MotoGP.Models.ViewModels.SelectRaceViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ViewData["Title"] = "Races";
+
+    String raceNumber = Convert.ToString(ViewData["raceNr"]);
+
+}
+
+<style>
+    .parent {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+</style>
+
+<form asp-controller="Info" asp-action="SelectRace" method="get">
+    <select asp-for="raceID" asp-items="Model.Races">
+        <option value="0">-- Select a rating --</option>
+    </select>
+    <input type="submit" value="Filter" />
+</form>
+
+<br />
+
+<div class="parent">
+    @foreach (var item in Model.RacesList)
+    {
+        <img src="@raceNumber" />
+        <div>
+            <h3>@(Html.DisplayFor(modelItem => item.Name)) - @(Html.DisplayFor(modelItem => item.Country))</h3>
+            <h3>Length: @(Html.DisplayFor(modelItem => item.Length)) m</h3>
+            <h3>Date: @(Html.DisplayFor(modelItem => item.Date))</h3>
+
+            <hr>
+
+            <p>@(Html.DisplayFor(modelItem => item.Description))</p>
+        </div>
+    }
+</div>
+
+<p>
+    <a asp-controller="Info" asp-action="ListRaces">Back</a>
+</p>

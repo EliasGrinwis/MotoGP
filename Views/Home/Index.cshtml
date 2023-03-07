@@ -1,0 +1,18 @@
+﻿@{
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+
+    ViewData["Title"] = "Home Page";
+}
+
+<style>
+    .centered {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
+
+
+<a asp-controller="Home" asp-action="Menu"><img class="centered" src="~/images/banners/logo.png" /></a>
+

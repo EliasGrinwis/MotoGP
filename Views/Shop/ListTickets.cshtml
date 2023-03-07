@@ -1,0 +1,80 @@
+﻿@model MotoGP.Models.ViewModels.SelectRaceViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ViewData["Title"] = "Ordered Tickets";
+
+}
+
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+
+<form asp-controller="Shop" asp-action="ListTickets" method="get">
+    <select asp-for="raceID" asp-items="Model.Races">
+        <option value="0">-- Select a rating --</option>
+    </select>
+    <input type="submit" value="Filter" />
+</form>
+
+@if (Model.TicketList.Count == 0)
+{
+    <p>No tickets ordered for this race yet.</p>
+} else
+{
+    <table>
+        <tr>
+            <th>OrderDate</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Country</th>
+            <th>Race</th>
+            <th>Number</th>
+            <th></th>
+        </tr>
+        @foreach (var ticket in Model.TicketList)
+        {
+            <tr>
+                <td>@(Html.DisplayFor(modelItem => ticket.OrderDate))</td>
+                <td>@(Html.DisplayFor(modelItem => ticket.Name))</td>
+                <td>@(Html.DisplayFor(modelItem => ticket.Email))</td>
+                <td>@(Html.DisplayFor(modelItem => ticket.Address))</td>
+                <td>@(Html.DisplayFor(modelItem => ticket.Country.Name))</td>
+                <td>@(Html.DisplayFor(modelItem => ticket.Race.Name))</td>
+                <td>@(Html.DisplayFor(modelItem => ticket.Number))</td>
+                @if ((bool)ticket.Paid)
+                {
+                    <td>Paid</td>
+                } else
+                {
+                    <td>
+                        <a asp-controller="Shop" asp-action="EditTicket" asp-route-id="@ticket.TicketID">Pay</a>
+                    </td>
+                }
+
+            </tr>
+        }
+
+    </table>
+}
+
+
+<a asp-controller="Home" asp-action="Menu">Back</a>

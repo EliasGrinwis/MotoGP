@@ -1,0 +1,67 @@
+﻿@model MotoGP.Models.Ticket
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ViewData["Title"] = "Order Tickets";
+
+    var countries = (IEnumerable<SelectListItem>)ViewData["Countries"];
+    var races = (IEnumerable<SelectListItem>)ViewData["Races"];
+
+}
+
+<style>
+    div {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+</style>
+
+<p>Please fill out following fields:</p>
+
+<form asp-action="OrderTicket">
+    <div>
+        <label asp-for="Name">@Html.DisplayNameFor(model => model.Name)</label>
+        <input asp-for="Name" />
+    </div>
+
+    <div>
+        <label asp-for="Email">@Html.DisplayNameFor(model => model.Email)</label>
+        <input asp-for="Email" />
+    </div>
+  
+    <div>
+        <label asp-for="Address">@Html.DisplayNameFor(model => model.Address)</label>
+        <input asp-for="Address" />
+    </div>
+
+    <div>
+        <label asp-for="CountryID">
+            @Html.DisplayNameFor(model => model.Country)
+        </label>
+        <select asp-for="CountryID", asp-items="countries"></select>
+    </div>
+
+    <div>
+        <label asp-for="RaceID">@Html.DisplayNameFor(model => model.Race)</label>
+        <select asp-for="RaceID", asp-items="races"></select>
+    </div>
+
+    <div>
+        <label asp-for="Number">@Html.DisplayNameFor(model => model.Number)</label>
+        <input asp-for="Number" type="radio" value="1"/>1
+        <input asp-for="Number" type="radio" value="2" />2
+        <input asp-for="Number" type="radio" value="3" />3
+        <input asp-for="Number" type="radio" value="4" />4
+        <input asp-for="Number" type="radio" value="5" />5
+        <input asp-for="Number" type="radio" value="6" />6
+    </div>
+
+    <input type="submit" value="Order"/>
+</form>
+
+@*<a asp-controller="Shop" asp-action="ConfirmOrder" asp-route-id="@item.RaceID">
+    @(Html.DisplayFor(modelItem => item.Name))
+</a>*@
+
+<a asp-controller="Home" asp-action="Menu">Back</a>

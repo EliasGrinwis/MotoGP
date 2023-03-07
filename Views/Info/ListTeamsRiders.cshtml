@@ -1,0 +1,82 @@
+﻿@model MotoGP.Models.ViewModels.ListTeamsRidersViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ViewData["Title"] = "Teams & Riders";
+
+}
+
+<style>
+    .parent {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .child {
+        background-color: lightgray;
+        padding: 10px;
+        margin: auto;
+    }
+
+    img {
+        width: 100%;
+    }
+
+    .flag {
+        width: 20%;
+    }
+
+    .flex {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .number {
+        font-weight: bold;
+        font-size: 23px;
+    }
+
+    .riders p {
+        margin: 0px;
+    }
+</style>
+
+<div class="parent">
+    @foreach (var team in Model.TeamsList)
+    {
+        var logo = Html.DisplayFor(modelItem => team.Logo);
+
+        <div class="child">
+              <a asp-controller="Info" asp-action="ListTeamsRiders" asp-route-teamID="@team.TeamID">
+                  <img src="/images/teams/@logo" />
+              </a>
+        </div>
+    }
+</div>
+
+<div class="parent">
+    @foreach (var rider in Model.RidersList)
+    {
+        var profileNumber = Html.DisplayFor(modelItem => rider.Number);
+        var countryNumber = Html.DisplayFor(modelItem => rider.CountryID);
+
+        <div class="child">
+            <img src="/images/riders/@(profileNumber).jpg">
+            <div class="flex">
+                <img class="flag" src="/images/flags/@(countryNumber).png">
+                <p class="number">@Html.DisplayFor(modelItem => rider.Number)</p>
+            </div>
+            <p><span>@Html.DisplayFor(modelItem => rider.FirstName)</span> <span>@Html.DisplayFor(modelItem => rider.LastName)</span></p>
+        </div>
+    }
+</div>
+
+
+
+<a asp-controller="Home" asp-action="Menu">Back</a>
+<span>|</span>
+<a asp-controller="Info" asp-action="ListTeamsRiders">Teams & Riders</a>

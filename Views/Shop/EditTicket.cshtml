@@ -1,0 +1,66 @@
+﻿@model MotoGP.Models.Ticket
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ViewData["Title"] = "Edit ticket";
+
+}
+
+<style>
+    table {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 5px;
+        text-align: left;
+    }
+</style>
+
+<table style="width:100%">
+    <tr>
+        <th>Name</th>
+        <td> @Html.DisplayFor(model => model.Name)</td>
+    </tr>
+    <tr>
+        <th>Email</th>
+        <td> @Html.DisplayFor(model => model.Email)</td>
+    </tr>
+    <tr>
+        <th>Address</th>
+        <td> @Html.DisplayFor(model => model.Address)</td>
+    </tr>
+    <tr>
+        <th>Country</th>
+        <td> @Html.DisplayFor(model => model.Country.Name)</td>
+    </tr>
+    <tr>
+        <th>Race</th>
+        <td> @Html.DisplayFor(model => model.Race.Name)</td>
+    </tr>
+    <tr>
+        <th>Number</th>
+        <td> @Html.DisplayFor(model => model.Number)</td>
+    </tr> 
+</table>
+
+<form asp-action="EditTicket" method="post">
+    <div>
+        <input type="hidden" asp-for="TicketID" />
+
+        <label>
+            <input type="checkbox" asp-for="Paid"/>Paid
+        </label>
+    </div>
+
+    <button type="submit">Order</button>
+</form>
+
+<a asp-controller="Home" asp-action="Menu">Back</a>

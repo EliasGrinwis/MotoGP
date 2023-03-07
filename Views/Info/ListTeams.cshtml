@@ -1,0 +1,69 @@
+﻿@model IEnumerable<MotoGP.Models.Team>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ViewData["Title"] = "Teams";
+
+}
+
+<style>
+    .parent {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .child {
+        background-color: lightgray;
+        padding: 10px;
+        margin: auto;
+    }
+
+    img {
+        width: 100%;
+    }
+
+    .flag {
+        width: 20%;
+    }
+
+    .flex {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .number {
+        font-weight: bold;
+        font-size: 23px;
+    }
+
+    .riders p {
+        margin: 0px;
+    }
+</style>
+
+<div class="parent">
+    @foreach (var team in Model)
+    {
+        var logo = Html.DisplayFor(modelItem => team.Logo);
+
+        <div class="child">
+            <img src="/images/teams/@(logo)">
+            <p>@Html.DisplayFor(modelItem => team.Name)</p>
+
+            <div class="riders">
+            @foreach (var rider in team.Riders)
+            {
+                    <p>@Html.DisplayFor(modelItem => rider.FirstName) @Html.DisplayFor(modelItem => rider.LastName)</p>
+            }
+            </div>
+        </div>
+    }
+</div>
+
+<a asp-controller="Home" asp-action="Menu">Back</a>
+<span>|</span>
+<a asp-controller="Info" asp-action="ListTeamsRiders">Teams & Riders</a>
