@@ -1,0 +1,64 @@
+﻿@model MotoGP.Models.ViewModels.ListTeamsRidersViewModel
+
+@{
+    ViewData["Title"] = "Teams & Riders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="parent">
+    @foreach (var team in Model.Teams)
+    {
+        <div class="card">
+            <a asp-controller="Info" asp-action="ListTeamsRiders" asp-route-teamID="@team.TeamID"><img src="~/images/teams/@(team.Logo)"></a>
+        </div>
+    }
+</div>
+
+@if(Model.Riders != null)
+{
+    <div class="parent">
+        @foreach (var rider in Model.Riders)
+        {
+                <div class="card">
+                        <img src="~/images/riders/@(rider.Number).jpg">
+
+                        <div class="flex">
+                            <img style="width: 20%" src="~/images/flags/@(rider.CountryID).png">
+                            <p class="number">@rider.Number</p>
+                        </div>
+
+                        <p>@rider.FirstName @rider.LastName</p>
+                </div>
+        }
+    </div>
+}
+
+<style>
+    .parent {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+
+    .card {
+        background-color: lightgray;
+        padding: 10px;
+        margin: auto;
+    }
+
+    img {
+        width: 100%;
+    }
+
+    .flex {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .number {
+        font-weight: bold;
+        font-size: 23px;
+    }
+</style>

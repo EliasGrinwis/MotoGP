@@ -1,0 +1,23 @@
+﻿@model IEnumerable<MotoGP.Models.Race>
+
+@{
+    ViewData["Title"] = "Races";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@foreach(var race in Model)
+{
+    <div>
+        <span>@(Html.DisplayFor(modelItem => race.Date)) </span>
+        <a asp-controller="Info" asp-action="ShowRace" asp-route-id="@race.RaceID">
+            @(Html.DisplayFor(modelItem => race.Name))
+        </a>
+    </div>
+}
+
+<a asp-controller="Home" asp-action="Menu">Back</a>
+<span>|</span>
+<a asp-controller="Info" asp-action="BuildMap">Races on map</a>
+<span>|</span>
+<a asp-controller="Info" asp-action="SelectRace">One by one</a>

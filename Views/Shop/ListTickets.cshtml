@@ -1,0 +1,60 @@
+﻿@model MotoGP.Models.ViewModels.ListTicketsViewModel
+
+@{
+    ViewData["Title"] = "Ordered tickets";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form asp-controller="Shop" asp-action="ListTickets" method="get">
+    <select asp-for="raceID" asp-items="Model.Races">
+        <option value="0">-- Select a race --</option>
+    </select>
+    <input type="submit" value="Filter"/>
+</form>
+
+@if(!Model.Tickets.Any())
+{
+    <p>No tickets ordered for this race yet.</p>
+} else
+{
+    <table>
+        <thead>
+            <tr>
+                <th>@(Html.DisplayNameFor(model => model.Tickets[0].OrderDate))</th>
+                <th>@(Html.DisplayNameFor(model => model.Tickets[0].Name))</th>
+                <th>@(Html.DisplayNameFor(model => model.Tickets[0].Email))</th>
+                <th>@(Html.DisplayNameFor(model => model.Tickets[0].Address))</th>
+                <th>@(Html.DisplayNameFor(model => model.Tickets[0].Country))</th>
+                <th>@(Html.DisplayNameFor(model => model.Tickets[0].Race))</th>
+                <th>@(Html.DisplayNameFor(model => model.Tickets[0].Number))</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ticket in Model.Tickets)
+            {
+                <tr>
+                    <td>@(Html.DisplayFor(modelitem => ticket.OrderDate))</td>
+                    <td>@(Html.DisplayFor(modelitem => ticket.Name))</td>
+                    <td>@(Html.DisplayFor(modelitem => ticket.Email))</td>
+                    <td>@(Html.DisplayFor(modelitem => ticket.Address))</td>
+                    <td>@(Html.DisplayFor(modelitem => ticket.Country.Name))</td>
+                    <td>@(Html.DisplayFor(modelitem => ticket.Race.Name))</td>
+                    <td>@(Html.DisplayFor(modelitem => ticket.Number))</td>
+
+                    @if (ticket.Paid)
+                    {
+                        <td>Paid</td>
+                    }
+                    else
+                    {
+                        <td><a asp-controller="Shop" asp-action="EditTicket" asp-route-id="@ticket.TicketID">Pay</a></td>
+                    }
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<a asp-controller="Home" asp-action="Menu">Back</a>

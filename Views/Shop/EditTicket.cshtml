@@ -1,0 +1,31 @@
+﻿@model MotoGP.Models.Ticket
+
+@{
+    ViewData["Title"] = "Edit ticket";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<p>Name: @(Html.DisplayFor(model => model.Name))</p>
+<p>Email: @(Html.DisplayFor(model => model.Email))</p>
+<p>Address: @(Html.DisplayFor(model => model.Address))</p>
+<p>Country: @(Html.DisplayFor(model => model.Country.Name))</p>
+<p>Race: @(Html.DisplayFor(model => model.Race.Name))</p>
+<p>Number: @(Html.DisplayFor(model => model.Number))</p>
+
+<form asp-controller="Shop" asp-action="EditTicket" method="post">
+    <div>
+        <input type="hidden" asp-for="TicketID" />
+
+        <label>
+            <input type="checkbox" asp-for="Paid" />Paid
+        </label>
+    </div>
+
+    <div>
+        <input type="submit" value="Register" />
+    </div>
+</form>
+
+<a asp-controller="Shop" asp-action="ListTickets">Back</a>

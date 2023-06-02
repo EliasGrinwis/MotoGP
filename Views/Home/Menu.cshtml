@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Menu";
+
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+
+}
+
+<img style="width: 100%" src="~/images/banners/@ViewData["banner"]" />
+
+<div class="flex">
+    <div>
+        <a asp-controller="Info" asp-action="ListRaces">
+            <img src="~/images/banners/races.png" />
+        </a>
+
+        <a asp-controller="Info" asp-action="ListTeams">
+            <img src="~/images/banners/teams.png" />
+        </a>
+    </div>
+    <div>
+        <a asp-controller="Info" asp-action="ListRiders">
+            <img src="~/images/banners/riders.png" />
+        </a>
+
+        <a asp-controller="Shop" asp-action="OrderTicket">
+            <img src="~/images/banners/tickets.png" />
+        </a>
+    </div>
+</div>
+
+<a asp-controller="Shop" asp-action="ListTickets">Admin Tickets</a>
+
+<style>
+    .flex {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 4rem;
+    }
+</style>

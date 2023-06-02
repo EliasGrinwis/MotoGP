@@ -1,0 +1,46 @@
+﻿@model IEnumerable<MotoGP.Models.Team>
+
+@{
+    ViewData["Title"] = "Teams";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="parent">
+    @foreach (var team in Model)
+    {
+        <div class="card">
+            <img src="~/images/teams/@(team.Logo)">
+
+            <p>@team.Name</p>
+
+            @foreach(var rider in team.riders)
+            {
+                <p>@rider.FirstName @rider.LastName</p>
+            }
+        </div>
+    }
+</div>
+
+<a asp-controller="Home" asp-action="Menu">Back</a>
+<span>|</span>
+<a asp-controller="Info" asp-action="ListTeamsRiders">Teams & Riders</a>
+
+<style>
+    .parent {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+
+    .card {
+        background-color: lightgray;
+        padding: 10px;
+        margin: auto;
+    }
+
+    img {
+        width: 100%;
+    }
+</style>

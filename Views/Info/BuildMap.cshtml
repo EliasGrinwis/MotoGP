@@ -1,0 +1,16 @@
+﻿@model IEnumerable<MotoGP.Models.Race>
+
+@{
+    ViewData["Title"] = "Races on map";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<img src="~/images/banners/map.png" alt="map" usemap="#map">
+
+<map name="map">
+
+    @foreach (var race in Model)
+    {
+        <area shape="circle" coords="@race.X, @race.Y, 10" alt="@race.Name" href="@Url.Action("ShowRace", "Info", new { id = race.RaceID})">
+    }
+</map>

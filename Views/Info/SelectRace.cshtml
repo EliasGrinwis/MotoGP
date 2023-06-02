@@ -1,0 +1,41 @@
+﻿@model MotoGP.Models.ViewModels.SelectRaceViewModel
+
+@{
+    ViewData["Title"] = "Races";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form asp-controller="Info" asp-action="SelectRace" method="get">
+    <select asp-for="raceID" asp-items="Model.Races">
+        <option value="0">-- Select a race --</option>
+    </select>
+    <input type="submit" value="Filter"/>
+</form>
+
+@if(Model.race != null)
+{
+    <div class="flex">
+        <div>
+            <img src="~/images/races/@(Model.race.RaceID).jpg" />
+        </div>
+        <div>
+            <p>@Model.race.Name - @Model.race.Country</p>
+            <p>Length: @Model.race.Length m</p>
+            <p>Date: @Html.DisplayFor(model => model.race.Date)</p>
+            <p></p>
+            <p>@Model.race.Description</p>
+        </div>
+    </div>
+}
+
+<a asp-controller="Info" asp-action="ListRaces">Back</a>
+
+<style>
+    .flex {
+        margin-top: 20px;
+        display: flex;
+        gap: 3rem;
+        align-items: center;
+    }
+</style>

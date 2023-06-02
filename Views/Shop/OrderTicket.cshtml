@@ -1,0 +1,73 @@
+﻿@model MotoGP.Models.Ticket
+
+@{
+    ViewData["Title"] = "Order tickets";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var countries = (IEnumerable<SelectListItem>) ViewData["Countries"]!;
+    var races = (IEnumerable<Race>)ViewData["Races"];
+}
+
+<p> Please fill out following fields:</p>
+
+<form asp-action="CreateOrder" method="post">
+
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" />
+    </div>
+    
+    <div>
+        <label asp-for="Email"></label>
+        <input asp-for="Email" />
+    </div>
+
+    <div>
+        <label asp-for="Address"></label>
+        <input asp-for="Address" />
+    </div>
+
+    <div>
+        <label asp-for="Country"></label>
+        <select asp-for="CountryID" asp-items="countries"></select>
+    </div>
+
+    <div class="flex">
+        <div>
+            <label asp-for="Race"></label>
+        </div>
+
+        <div>
+            @foreach (var race in races)
+            {
+                <input asp-for="RaceID" type="radio" value="@race.RaceID" />@race.Name
+                <br />
+            }
+        </div>
+    </div>
+
+    <div>
+        <label asp-for="Number"></label>
+        <input asp-for="Number" type="radio" value="1" />1
+        <input asp-for="Number" type="radio" value="2" />2
+        <input asp-for="Number" type="radio" value="3" />3
+        <input asp-for="Number" type="radio" value="4" />4 
+        <input asp-for="Number" type="radio" value="5" />5
+        <input asp-for="Number" type="radio" value="6" />6
+    </div>
+
+    <input type="submit" value="Order"/>
+</form>
+
+
+<a asp-controller="Home" asp-action="Menu">Back</a>
+
+
+<style>
+    .flex {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+    }
+</style>
